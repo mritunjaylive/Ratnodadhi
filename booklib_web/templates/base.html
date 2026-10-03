@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <title>{% block title %}Ratnodadhi Library{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <header class="navbar">
+    <a href="/" class="nav-brand" style="display:flex; align-items:center; gap:8px;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+      </svg>
+      <span>Ratnodadhi</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="/" class="nav-link {% if active_shelf == 'all' %}active{% endif %}">All Books</a>
+      <a href="/shelf/continue" class="nav-link {% if active_shelf == 'continue' %}active{% endif %}">Continue</a>
+      <a href="/shelf/recent" class="nav-link {% if active_shelf == 'recent' %}active{% endif %}">Recent</a>
+      <a href="/shelf/want" class="nav-link {% if active_shelf == 'want' %}active{% endif %}">Wishlist</a>
+    </nav>
+
+    <form class="search-box" action="/" method="GET">
+      <input type="search" name="q" placeholder="Search books…" value="{{ search_query or '' }}" aria-label="Search">
+      <button type="submit">Search</button>
+    </form>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>Ratnodadhi Personal Book Library · Local Web Access</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

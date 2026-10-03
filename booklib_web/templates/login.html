@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Sign In — Ratnodadhi{% endblock %}
+
+{% block content %}
+  <div class="auth-box">
+    <h2 style="text-align:center;">Ratnodadhi Web Access</h2>
+    <p style="text-align:center; color:var(--text-muted); font-size:0.9rem;">
+      Enter the library access password configured in your desktop app.
+    </p>
+
+    {% if error %}
+      <div style="background:rgba(239, 68, 68, 0.1); border:1px solid var(--danger-color); color:var(--danger-color); padding:10px; border-radius:var(--radius); font-size:0.9rem;">
+        {{ error }}
+      </div>
+    {% endif %}
+
+    <form method="POST" action="/login" style="display:flex; flex-direction:column; gap:16px;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <div class="form-group">
+        <label for="password" style="font-size:0.9rem; font-weight:600;">Password</label>
+        <input type="password" id="password" name="password" required autofocus autocomplete="current-password">
+      </div>
+
+      <button type="submit" class="btn" style="width:100%;">Sign In</button>
+    </form>
+  </div>
+{% endblock %}

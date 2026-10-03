@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}{{ book.title or book.filename }} — Ratnodadhi{% endblock %}
+
+{% block content %}
+  <div style="margin-bottom:16px;">
+    <a href="/" style="color:var(--text-muted); text-decoration:none; font-size:0.9rem;">◀ Back to library</a>
+  </div>
+
+  <div class="book-detail-card">
+    <div style="display:flex; flex-direction:column; align-items:center; gap:16px;">
+      <img src="/covers/{{ book.id }}.jpg" alt="{{ book.title }}" class="detail-cover">
+      <a href="/book/{{ book.id }}/download" class="btn" style="width:100%; max-width:240px; font-size:1rem; display:inline-flex; align-items:center; justify-content:center; gap:8px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <span>Download ({{ format_size(book.size_bytes) }})</span>
+      </a>
+    </div>
+
+    <div class="detail-body">
+      <h2>{{ book.title or book.filename }}</h2>
+      <h3 style="color:var(--text-muted); font-weight:normal; font-size:1.1rem; margin-top:-6px;">
+        {{ book.author or 'Unknown Author' }}
+      </h3>
+
+      {% if book.series_name %}
+        <div style="font-size:0.9rem; color:var(--accent-color); font-weight:600;">
+          Book {{ book.series_index if book.series_index is not None else '' }} of {{ book.series_name }}
+        </div>
+      {% endif %}
+
+      {% if allow_changes %}
+        <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap; margin:8px 0; padding:12px; background:var(--bg-color); border-radius:var(--radius);">
+          <div>
+            <label for="detail-status-select" style="font-size:0.85rem; font-weight:600; margin-right:6px;">Status:</label>
+            <select id="detail-status-select" data-book-id="{{ book.id }}" style="padding:6px; border-radius:var(--radius); border:1px solid var(--border-color); background:var(--surface-color); color:var(--text-color);">
+              <option value="" {% if not book.status %}selected{% endif %}>Unset</option>
+              <option value="want" {% if book.status == 'want' %}selected{% endif %}>Want to Read</option>
+              <option value="reading" {% if book.status == 'reading' %}selected{% endif %}>Reading</option>
+              <option value="read" {% if book.status == 'read' %}selected{% endif %}>Read</option>
+            </select>
+          </div>
+          <div>
+            <span style="font-size:0.85rem; font-weight:600; margin-right:6px;">Rating:</span>
+            {% for star in range(1, 6) %}
+              <button type="button" class="btn-rating {% if book.rating and star <= book.rating %}active{% endif %}" data-book-id="{{ book.id }}" data-rating="{{ star }}" style="background:none; border:none; cursor:pointer; font-size:1.2rem; color:{% if book.rating and star <= book.rating %}#eab308{% else %}var(--text-muted){% endif %};">★</button>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      <table class="detail-meta-table">
+        <tbody>
+          <tr><td>Format</td><td>{{ book.format.upper() }}</td></tr>
+          {% if book.year %}<tr><td>Year</td><td>{{ book.year }}</td></tr>{% endif %}
+          {% if book.pages %}<tr><td>Pages</td><td>{{ book.pages }}</td></tr>{% endif %}
+          {% if book.publisher %}<tr><td>Publisher</td><td>{{ book.publisher }}</td></tr>{% endif %}
+          {% if book.genre %}<tr><td>Genre</td><td>{{ book.genre }}</td></tr>{% endif %}
+          {% if book.language %}<tr><td>Language</td><td>{{ book.language }}</td></tr>{% endif %}
+          {% if book.isbn %}<tr><td>ISBN</td><td>{{ book.isbn }}</td></tr>{% endif %}
+          {% if book.tags %}
+            <tr>
+              <td>Tags</td>
+              <td>
+                {% for tag in book.tags %}
+                  <span class="book-badge" style="margin-right:4px;">#{{ tag.name }}</span>
+                {% endfor %}
+              </td>
+            </tr>
+          {% endif %}
+        </tbody>
+      </table>
+
+      {% if book.description %}
+        <div style="margin-top:12px;">
+          <h4 style="font-size:0.95rem; margin-bottom:6px;">Description</h4>
+          <div style="font-size:0.9rem; color:var(--text-muted); line-height:1.6; white-space:pre-line;">
+            {{ book.description }}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

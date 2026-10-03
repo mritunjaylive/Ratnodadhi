@@ -1,0 +1,135 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+dist-installer/
+Output/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller / Executables & Installers
+*.manifest
+*.spec
+!ratnodadhi.spec
+!ratnodadhi-onefile.spec
+
+# Inno Setup compiler backups & temp files
+*.iss.bak
+_is*.tmp
+
+# Virtual Environments
+.env
+.venv
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# SQLite & Application Database Files
+*.db
+*.db-wal
+*.db-shm
+*.db.bak*
+*.sqlite
+*.sqlite3
+library.db*
+fulltext.db*
+
+# App Data, Caches & Temporary Storage
+covers/
+drive_cache/
+tmp/
+temp/
+cache/
+safety/
+backups/
+scratch/
+.booklib-cache
+*.part
+*.tmp-*
+*.tmp
+*.bak
+*.swp
+*~
+
+# Log Files
+*.log
+app.log*
+web_access.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Secrets, OAuth Credentials & Tokens
+client_secret*.json
+google_client.json
+credentials.json
+token.json
+token.pickle
+*.key
+*.pem
+*.p12
+*.pfx
+.env.*
+secrets/
+certs/
+
+# Testing & Code Quality
+.pytest_cache/
+.coverage
+.coverage.*
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+
+# OS-generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# IDE & Editor Configurations
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+.agents/
+.cursor/
